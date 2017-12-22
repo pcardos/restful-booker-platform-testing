@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.seleniumhq.selenium:selenium-java:3.0.1'
+    compile 'info.cukes:cucumber-picocontainer:1.2.5'
+    compile 'info.cukes:cucumber-junit:1.2.5'
+    compile 'info.cukes:cucumber-testng:1.2.5'
+    compile 'junit:junit:4.12'
+}
+
+buildscript {
+	repositories {
+	    mavenLocal()
+	    mavenCentral()
+	}
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.booker.tests.Runner'
+    }
+}
+
+task fatJar(type: Jar) {
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    
+    manifest {
+		attributes(
+        	'Class-Path': configurations.compile.collect{it.toURI().toString()}.join(' '),
+         	'Main-Class': 'com.booker.tests.Runner')    }
+}
+
