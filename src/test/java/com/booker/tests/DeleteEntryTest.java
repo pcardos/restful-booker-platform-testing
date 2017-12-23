@@ -39,11 +39,11 @@ public class DeleteEntryTest {
     public void testDeleteEntry() throws InterruptedException {
     	booker.deleteEntryAndWaitUntilNotPresent();
     	
-		assertFalse(booker.hotelNameField.exists(0));
-		assertFalse(booker.hotelAddressField.exists(0));
-		assertFalse(booker.hotelOwnerField.exists(0));
-		assertFalse(booker.hotelPhoneField.exists(0));
-		assertFalse(booker.hotelEmailField.exists(0));
+		assertFalse(booker.hotelNameField.isPresent(0));
+		assertFalse(booker.hotelAddressField.isPresent(0));
+		assertFalse(booker.hotelOwnerField.isPresent(0));
+		assertFalse(booker.hotelPhoneField.isPresent(0));
+		assertFalse(booker.hotelEmailField.isPresent(0));
     }
     
     @After

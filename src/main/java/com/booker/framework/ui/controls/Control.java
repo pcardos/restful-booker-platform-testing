@@ -9,8 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.booker.framework.Configuration;
 import com.booker.framework.ui.Page;
 
+
 public class Control {
-	public static final long TIMEOUT = Configuration.timeout();
+	public static final long TIMEOUT = Configuration.getTimeout();
 	Page page;
 	WebDriverWait wait;
 	By locator;
@@ -25,7 +26,7 @@ public class Control {
 		return page.getDriver().findElement(locator);
 	}
 
-	public boolean exists(long timeout) {
+	public boolean isPresent(long timeout) {
 		wait = new WebDriverWait(page.getDriver(), timeout);
 		try {
 			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
@@ -36,16 +37,15 @@ public class Control {
 		return true;
 	}
 	
-	public boolean exists() {
-		return exists(TIMEOUT);
+	public boolean isPresent() {
+		return isPresent(TIMEOUT);
 	}
 	
 	public void click() {
-		exists();
+		isPresent();
 		this.getElement().click();
 	}
 	
-
 	public boolean isVisible(long timeout) {
 		wait = new WebDriverWait(page.getDriver(), timeout);
 		try {

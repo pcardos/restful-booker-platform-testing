@@ -12,10 +12,15 @@ public class Edit extends Control {
 	}
 	
 	public void setText(String value) {
-		this.exists();
+		this.isPresent();
 		this.click();
 		this.getElement().click();
 		this.getElement().clear();
 		this.getElement().sendKeys(value);
+	}
+	
+	public void waitForVisbility() {
+    	this.isPresent();
+    	this.isVisible();
 	}
 }

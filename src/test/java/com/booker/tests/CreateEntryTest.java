@@ -32,7 +32,8 @@ public class CreateEntryTest {
     
     @Test
     public void testCreateEntry() throws InterruptedException {
-    	booker.createHotelEntry(Configuration.get("hotelName"), 
+    	booker.createHotelEntryAndWaitForVisibility(
+    			Configuration.get("hotelName"), 
     			Configuration.get("hotelAddress"), 
     			Configuration.get("hotelOwner"), 
     			Configuration.get("hotelPhone"), 

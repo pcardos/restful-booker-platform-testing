@@ -21,7 +21,7 @@ public final class Configuration {
 	
 	public static void loadTestProperties() throws IOException {
 		properties = new Properties();
-		InputStream input = new FileInputStream(new File("config.properties"));
+		InputStream input = new FileInputStream(new File("src/test/resources/config.properties"));
 		
 		BufferedReader reader =  new BufferedReader(
 				new InputStreamReader(input, StandardCharsets.UTF_8));
@@ -40,14 +40,14 @@ public final class Configuration {
 		return value == null ? "" : value;
 	}
 	
-	public  static void printConfigOptions() {
+	public static long getTimeout() {
+		String value = get("timeout");
+		return Long.parseLong(value);
+	}
+
+	public  static void printProperties() {
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			System.out.println(String.format("%s=%s", entry.getKey(), entry.getValue()));
 		}
-	}
-	
-	public static long timeout() {
-		String value = get("timeout");
-		return Long.parseLong(value);
 	}
 }

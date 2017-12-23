@@ -39,3 +39,7 @@ task fatJar(type: Jar) {
          	'Main-Class': 'com.booker.tests.Runner')    }
 }
 
+// Override the test task so that the tests run when the clases are up to date
+test {
+    dependsOn 'cleanTest'
+}

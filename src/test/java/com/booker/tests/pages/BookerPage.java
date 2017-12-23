@@ -6,29 +6,31 @@ import org.openqa.selenium.WebDriver;
 import com.booker.framework.Configuration;
 import com.booker.framework.ui.Page;
 import com.booker.framework.ui.controls.Button;
-import com.booker.framework.ui.controls.Control;
 import com.booker.framework.ui.controls.Edit;
+import com.booker.framework.ui.controls.Field;
 import com.booker.framework.ui.controls.PopUp;
 
-public class BookerPage extends Page {
-	Edit hotelNameBox;
-	Edit hotelAddressBox;
-	Edit hotelOwnerBox;
-	Edit hotelPhoneBox;
-	Edit hotelEmailBox;
-	Button createHotelButton;
-	Button deleteHotelButton;
-	Button loginButton;
-	Edit loginusernameBox;
-	Edit loginPasswordBox;
-	PopUp loginPopUp;
-	Button doLoginButton;
 
-	public Control hotelNameField;
-	public Control hotelAddressField;
-	public Control hotelOwnerField;
-	public Control hotelPhoneField;
-	public Control hotelEmailField;
+public class BookerPage extends Page {
+	public Edit hotelNameBox;
+	public Edit hotelAddressBox;
+	public Edit hotelOwnerBox;
+	public Edit hotelPhoneBox;
+	public Edit hotelEmailBox;
+	public Button createHotelButton;
+	public Button deleteHotelButton;
+
+	public Button loginButton;
+	public Edit loginusernameBox;
+	public Edit loginPasswordBox;
+	public PopUp loginPopUp;
+	public Button doLoginButton;
+
+	public Field hotelNameField;
+	public Field hotelAddressField;
+	public Field hotelOwnerField;
+	public Field hotelPhoneField;
+	public Field hotelEmailField;
 	
 	public BookerPage(WebDriver driver) {
 		super(driver);
@@ -47,11 +49,11 @@ public class BookerPage extends Page {
 		this.loginPopUp        = new PopUp(this,  By.xpath("/html/body/div[1]/nav/div[2]/div"));
 		this.doLoginButton     = new Button(this, By.xpath("//*[@id=\"doLogin\"]"));
 		
-		this.hotelNameField    = new Control(this, By.xpath("//div[2]/div/div/p"));
-		this.hotelAddressField = new Control(this, By.xpath("//div[2]/div/div[2]/p"));;
-		this.hotelOwnerField   = new Control(this, By.xpath("//div[2]/div/div[3]/p"));;
-		this.hotelPhoneField   = new Control(this, By.xpath("//div[2]/div/div[4]/p"));;
-		this.hotelEmailField   = new Control(this, By.xpath("//div[2]/div/div[5]/p"));;
+		this.hotelNameField    = new Field(this, By.xpath("//div[2]/div/div/p"));
+		this.hotelAddressField = new Field(this, By.xpath("//div[2]/div/div[2]/p"));;
+		this.hotelOwnerField   = new Field(this, By.xpath("//div[2]/div/div[3]/p"));;
+		this.hotelPhoneField   = new Field(this, By.xpath("//div[2]/div/div[4]/p"));;
+		this.hotelEmailField   = new Field(this, By.xpath("//div[2]/div/div[5]/p"));;
 	}
 	
 	public Page navigate() {
@@ -75,6 +77,12 @@ public class BookerPage extends Page {
 		hotelPhoneBox.setText(phone);
 		hotelEmailBox.setText(email);
     	createHotelButton.click();
+	}
+	
+	public void createHotelEntryAndWaitForVisibility(String name, String address, String owner, String phone, String email) {
+		hotelNameBox.waitForVisbility();
+		createHotelEntry(name, address, owner, phone, email);
+		hotelNameField.waitForVisbility();
 	}
 
     public void deleteEntry() {

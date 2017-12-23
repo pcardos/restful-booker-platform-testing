@@ -2,6 +2,7 @@ package com.booker.framework.ui;
 
 import org.openqa.selenium.WebDriver;
 
+
 public class Page {
 	private WebDriver driver;
 	
